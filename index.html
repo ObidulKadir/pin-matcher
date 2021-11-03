@@ -43,7 +43,7 @@
                             </div>
                             <div>
                                 <button id="submitPin" type="submit" class="submit-btn">Submit</button>
-                                <p class="action-left">3 try left</p>
+                                <p id="actionText" class="action-left">3 try left</p>
                             </div>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
             // console.log(typeof(deductString));
             document.getElementById('windowArea').value = deductString.slice(0, deductString.length-1);
         }
-        var count  = 1;
+        var count  = 2 ;
         const submitPin =  document.getElementById('submitPin').addEventListener('click', function(){
             
             const generatedPin = document.getElementById('generatePinViewer').value
@@ -82,14 +82,23 @@
                 var notMatchMessage = document.getElementById('notMatchMessage');
                 notMatchMessage.style.display = "none";
             }
-            else{  
+            else{ 
+
                 var notMatchMessage = document.getElementById('notMatchMessage');
                 notMatchMessage.style.display = "block";
                 var matchMessage = document.getElementById('pinMatchMessage');
                 matchMessage.style.display = "none";
+                
+                var message = document.getElementById('actionText').innerText;
+                document.getElementById('actionText').innerText = count +" " +`try left` ;
+                
+                if(count == 0){
+                   document.getElementById('submitPin').disabled = true;
+                   document.getElementById('submitPin').style.opacity = .2;
+                }
             }
-            console.log(count);
-            count++;
+            count --;
+            
             
         })
     </script>
